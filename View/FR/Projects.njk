@@ -1,0 +1,21 @@
+{% extends "./Layout.njk" %}
+
+{% block title %}Mes Projets{% endblock %}
+
+{% block content %}
+  <h1>Mes Projets</h1>
+
+{% for project in projects %}
+  <div class="project">
+    <h2>{{ project.name }}</h2>
+    <p><strong>Date:</strong> {{ project.Date}}</p>
+    <img src="{{ project.image }}" alt="{{ project.name }}" style="width: 300px;">
+    <p>{{ project.description }}</p>
+    <ul>
+      {% for pt in project.tags %}
+        <li>{{ pt.tag.name }} ({{ pt.tag.type }})</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endfor %}
+{% endblock %}  

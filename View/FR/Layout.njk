@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Mon Site{% endblock %}</title>
+</head>
+<body>
+    {% include "./partials/header.njk" %}
+    
+    <section class="left">
+        {% block left %}{% endblock %}
+    </section>
+    
+    <main>
+  {% block content %}{% endblock %}
+    </main>
+
+    <section class="right">
+        {% block right %}{% endblock %}
+    </section>
+
+    {% include "./partials/footer.njk" %}
+</body>
+</html>

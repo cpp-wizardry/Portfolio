@@ -1,0 +1,24 @@
+{% extends "./Layout.njk" %}
+
+{% block title %}Nouveau Projet{% endblock %}
+
+{% block content %}
+  <form method="POST" action="/Projects">
+    <input type="text" name="name" placeholder="Nom du projet" required>
+    <input type="date" name="date" required>
+    <textarea name="description" placeholder="Description" required></textarea>
+    <input type="text" name="image" placeholder="Lien vers une image" required>
+
+    <fieldset>
+      <legend>Tags</legend>
+      {% for tag in tags %}
+        <label>
+          <input type="checkbox" name="tagIds" value="{{ tag.id }}">
+          {{ tag.name }} ({{ tag.type }})
+        </label><br>
+      {% endfor %}
+    </fieldset>
+
+    <button type="submit">Ajouter</button>
+  </form>
+{% endblock %}
