@@ -12,7 +12,7 @@ app.use(express.static('public'));
 
 app.use(express.urlencoded({ extended: true }));
 
-nunjucks.configure(['View'], {
+nunjucks.configure([path.join(__dirname, 'View')], {
   autoescape: true,
   express: app,
   noCache: true,
