@@ -3,5 +3,35 @@
 {% block title %}Accueil{% endblock %}
 
 {% block content %}
-    <h1>Bienvenue</h1>
+  <section class="welcome">
+    <h1>Bienvenue sur mon Portfolio Informatique</h1>
+    <p>Je m’appelle Mohamed el Salah AISSAOUI, étudiant en BUT Informatique à l'IUT du Puy-en-Velay. Passionné par le développement logiciel, les jeux vidéo, et les nouvelles technologies, je vous invite à découvrir mes projets, mon parcours et mes compétences.</p>
+  </section>
+
+  <section class="about-me">
+    <h2>Qui suis-je ?</h2>
+    <p>
+      Actuellement en 2ème année de BUT Informatique, je développe mes compétences en programmation (C#, Kotlin, Java...), en conception d’applications mobiles et web, ainsi qu’en développement de jeux vidéo avec Godot 4. Curieux et rigoureux, je cherche à évoluer dans un environnement stimulant et innovant.
+    </p>
+  </section>
+
+  <section class="highlight-projects">
+    <h2>Projets récents</h2>
+    <p>Voici quelques-uns de mes projets que vous pouvez consulter en détail :</p>
+    <ul>
+      {% for project in projects %}
+        <li>
+          <a href="/Projects/{{ project.id }}">{{ project.name }}</a> - {{ project.date }}
+        </li>
+      {% else %}
+        <li>Aucun projet disponible pour le moment.</li>
+      {% endfor %}
+    </ul>
+    <a href="/Projects">Voir tous mes projets →</a>
+  </section>
+
+  <section class="contact-invite">
+    <h2>Contact</h2>
+    <p>Vous souhaitez en savoir plus ou échanger ? <a href="/Contact">Contactez-moi ici.</a></p>
+  </section>
 {% endblock %}

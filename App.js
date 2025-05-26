@@ -29,6 +29,14 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
   res.render("FR/Index.njk");
 });
+app.get('/Contacts', (req, res) => {
+  res.render("FR/Contacts.njk");
+});
+
+app.get('/Parcours', (req, res) => {
+  res.render(`${res.locals.lang}/Parcours.njk`);
+});
+
 
 app.get('/Projects', async (req, res) => {
   const lang = res.locals.lang;
@@ -88,6 +96,70 @@ app.get('/Portfolio', (req, res) => {
   res.render(`${res.locals.lang}/Portfolio.njk`);
 });
 
+
+app.get('/Tags/:tagId', async (req, res) => {
+  const tagId = parseInt(req.params.tagId);
+  const lang = res.locals.lang;
+
+  try {
+    const tag = await prisma.tag.findUnique({
+      where: { id: tagId },
+    });
+
+    if (!tag) return res.status(404).send('Tag not found');
+
+    const projects = await prisma.project.findMany({
+      where: {
+        tags: {
+          some: {
+            tagId: tagId,
+          },
+        },
+      },
+      include: {
+        tags: {
+          include: {
+            tag: true,
+          },
+        },
+      },
+    });
+
+    res.render(`${lang}/Projects.njk`, { projects, tag });
+  } catch (err) {
+    console.error('Error filtering projects by tag:', err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+
 app.listen(port, () => {
   console.log("Listening on port: " + port);
+});
+
+app.get('/Projects/:id', async (req, res) => {
+  const projectId = parseInt(req.params.id);
+  const lang = res.locals.lang;
+
+  try {
+    const project = await prisma.project.findUnique({
+      where: { id: projectId },
+      include: {
+        tags: {
+          include: {
+            tag: true,
+          },
+        },
+      },
+    });
+
+    if (!project) {
+      return res.status(404).send('Project not found');
+    }
+
+    res.render(`${lang}/ProjectDetail.njk`, { project });
+  } catch (err) {
+    console.error('Error fetching project:', err);
+    res.status(500).send('Internal Server Error');
+  }
 });
