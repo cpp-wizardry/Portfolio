@@ -1,0 +1,28 @@
+{% extends "./Layout.njk" %}
+
+{% block title %}{{ project.name }}{% endblock %}
+
+{% block content %}
+  <h1>{{ project.name }}</h1>
+  <p><strong>Date:</strong> {{ project.date}}</p>
+
+  <div class="project-detail-gallery">
+    {% if project.images %}
+      {% for img in project.images %}
+        <img src="{{ img.url }}" alt="Capture {{ loop.index }}">
+      {% endfor %}
+    {% else %}
+      <img src="{{ project.image }}" alt="{{ project.name }}">
+    {% endif %}
+  </div>
+
+  <div class="project-tags">
+    {% for pt in project.tags %}
+      <span class="project-tag">{{ pt.tag.name }}</span>
+    {% endfor %}
+  </div>
+
+  <p class="project-detail-description">{{ project.description }}</p>
+
+  <a href="/Projects">← Retour à la liste des projets</a>
+{% endblock %}
