@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,14 +8,23 @@
 </head>
 <body>
 
-<div class="Header-btn">
-<button onclick="location.href='/'">Index</button>
-<button onclick="location.href='/Projects'">Projets</button>
-<button onclick="location.href='/Portfolio'">Portfolio</button>
-<button onclick="location.href='/Parcours'">Parcours</button>
-<button onclick="location.href='/Contacts'">Contact</button>
-</div>
+<header class="header-container">
+    <div class="logo">
+        <img src="/logo_no_BG.png" alt="Logo" height="40">
+    </div>
 
+    <div class="Header-btn" id="#parcours">
+        <button onclick="location.href='/'">Index</button>
+        <button onclick="location.href='/Projects'">Projets</button>
+        <button onclick="location.href='/Parcours'">Parcours</button>
+        <button onclick="location.href='/Contacts'">Contact</button>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Rechercher..." />
+        <button>🔍</button>
+    </div>
+</header>
 
 </body>
 </html>

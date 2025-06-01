@@ -12,12 +12,20 @@ app.use(express.static('public'));
 
 app.use(express.urlencoded({ extended: true }));
 
-nunjucks.configure([path.join(__dirname, 'View')], {
+const env = nunjucks.configure([path.join(__dirname, 'View')], {
   autoescape: true,
   express: app,
   noCache: true,
 });
 
+
+env.addFilter('yearMonth', function(dateStr) {
+  const date = new Date(dateStr);
+  if (isNaN(date)) return '';
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  return `${year}/${month}`;
+});
 
 app.use((req, res, next) => {
   const lang = req.query.lang;

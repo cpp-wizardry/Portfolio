@@ -21,7 +21,7 @@
     <ul>
       {% for project in projects %}
         <li>
-          <a href="/Projects/{{ project.id }}">{{ project.name }}</a> - {{ project.date }}
+          <a href="/Projects/{{ project.id }}">{{ project.name }}</a> - {{ project.date | YearMonth }}
         </li>
       {% else %}
         <li>Aucun projet disponible pour le moment.</li>

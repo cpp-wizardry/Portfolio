@@ -8,7 +8,7 @@
   {% for project in projects %}
     <div class="project">
       <h2>{{ project.name }}</h2>
-      <p><strong>Date:</strong> {{ project.date | date("YYYY-MM-DD") }}</p>
+      <p><strong>Date:</strong> {{ project.date }}</p>
       <img src="{{ project.image }}" alt="{{ project.name }}" style="width: 300px;">
       <p>{{ project.description }}</p>
 

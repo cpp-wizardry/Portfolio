@@ -10,7 +10,7 @@
       <img src="{{ project.image }}" alt="{{ project.name }}">
       <div class="project-content">
         <h2><a href="/Projects/{{ project.id }}">{{ project.name }}</a></h2>
-        <p><strong>Date:</strong> {{ project.date }}</p>
+        <p><strong>Date:</strong> {{ project.date | yearMonth }}</p>
         <div class="project-tags">
           {% for pt in project.tags %}
             <span class="project-tag">{{ pt.tag.name }}</span>
