@@ -1,0 +1,27 @@
+{% extends "./Layout.njk" %}
+
+{% block title %}Messages reçus{% endblock %}
+
+{% block content %}
+  <h1>Messages reçus</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Message</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for msg in messages %}
+        <tr>
+          <td>{{ msg.name }}</td>
+          <td><a href="mailto:{{ msg.email }}">{{ msg.email }}</a></td>
+          <td>{{ msg.content }}</td>
+          <td>{{ msg.createdAt | date("YYYY-MM-DD HH:mm") }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
