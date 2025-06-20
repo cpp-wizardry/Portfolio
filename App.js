@@ -64,24 +64,45 @@ app.get('/Parcours', (req, res) => {
 
 
 app.get('/Projects', async (req, res) => {
-  const lang = res.locals.lang;
-  try {
-    const projects = await prisma.project.findMany({
+  const searchTerm = req.query.search;
+
+  let projects;
+
+  if (searchTerm) {
+    projects = await prisma.project.findMany({
+      where: {
+        tags: {
+          some: {
+            tag: {
+              name: {
+                contains: searchTerm,
+                mode: 'insensitive'
+              }
+            }
+          }
+        }
+      },
       include: {
         tags: {
           include: {
-            tag: true,
-          },
-        },
-      },
+            tag: true
+          }
+        }
+      }
     });
-
-     console.log(projects);
-    res.render(`${res.locals.lang}/Projects.njk`, { projects });
-  } catch (err) {
-    console.error('Error loading projects:', err);
-    res.status(500).send('Internal Server Error');
+  } else {
+    projects = await prisma.project.findMany({
+      include: {
+        tags: {
+          include: {
+            tag: true
+          }
+        }
+      }
+    });
   }
+
+  res.render(`${res.locals.lang}/Projects.njk`, { projects });
 });
 
 
