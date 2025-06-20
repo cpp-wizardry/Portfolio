@@ -209,3 +209,37 @@ app.get('/Projects/:id', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
+app.post('/send-message', async (req, res) => {
+  const { name, email, message } = req.body;
+
+  try {
+    await prisma.message.create({
+      data: {
+        name,
+        email,
+        content: message,
+      },
+    });
+
+    res.redirect('/Contacts?sent=true');
+  } catch (err) {
+    console.error('Erreur lors de l\'enregistrement du message :', err);
+    res.status(500).send('Erreur interne.');
+  }
+});
+
+
+app.get('/Check_Message', async (req, res) => {
+  const auth = req.query.auth;
+  if (auth !== process.env.ADMIN_SECRET) {
+    return res.status(403).send("Accès interdit");
+  }
+
+  const messages = await prisma.message.findMany({
+    orderBy: { createdAt: 'desc' },
+  });
+
+  res.render(`FR/Check_Message.njk`, { messages });
+});
+
