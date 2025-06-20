@@ -19,7 +19,7 @@
           <td>{{ msg.name }}</td>
           <td><a href="mailto:{{ msg.email }}">{{ msg.email }}</a></td>
           <td>{{ msg.content }}</td>
-          <td>{{ msg.createdAt}}</td>
+          <td>{{ msg.createdAt | YearMonth}}</td>
         </tr>
       {% endfor %}
     </tbody>
