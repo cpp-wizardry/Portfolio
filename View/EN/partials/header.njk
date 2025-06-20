@@ -1,20 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Style/Header.css">
+    <link rel="stylesheet" href="/Style/Header.css">
     <title>Header</title>
 </head>
 <body>
 
-<div class="Header-btn">
-<button onclick="location.href='/Home'">Home</button>
-<button onclick="location.href='/'">Index</button>
-<button onclick="location.href='/Projects'">Projets</button>
-<button onclick="location.href='/Portfolio'"></button>
+<script src="/Navigation.js" defer></script>
 
+<header class="header-container">
+    <div class="logo">
+        <img src="/logo_no_BG.png" alt="Logo" height="40">
+    </div>
+
+<div class="Header-btn">
+    <button onclick="navigateWithLang('/')">Index</button>
+<button onclick="navigateWithLang('/Projects')">Projects</button>
+<button onclick="navigateWithLang('/Parcours')">Background</button>
+<button onclick="navigateWithLang('/Contacts')">Contact</button>
+
+    <button onclick="switchLang()">🌐 {{ lang }}</button>
 </div>
+
+
+    <div class="search-bar">
+        <input type="text" placeholder="Rechercher..." />
+        <button>🔍</button>
+    </div>
+</header>
+
+
+
+
 
 
 </body>

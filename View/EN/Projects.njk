@@ -1,22 +1,23 @@
 {% extends "./Layout.njk" %}
 
-{% block title %}Mes Projets{% endblock %}
+{% block title %}My Projects{% endblock %}
 
 {% block content %}
-  <h1>Mes Projets</h1>
+  <h1>My Projects</h1>
 
   {% for project in projects %}
-    <div class="project">
-      <h2>{{ project.name }}</h2>
-      <p><strong>Date:</strong> {{ project.date }}</p>
-      <img src="{{ project.image }}" alt="{{ project.name }}" style="width: 300px;">
-      <p>{{ project.description }}</p>
-
-      <ul>
-        {% for pt in project.tags %}
-          <li>{{ pt.tag.name }} ({{ pt.tag.type }})</li>
-        {% endfor %}
-      </ul>
+    <div class="project-card">
+      <img src="{{ project.image }}" alt="{{ project.name }}">
+      <div class="project-content">
+        <h2><a href="/Projects/{{ project.id }}">{{ project.name }}</a></h2>
+        <p><strong>Date:</strong> {{ project.date | yearMonth }}</p>
+        <div class="project-tags">
+          {% for pt in project.tags %}
+            <span class="project-tag">{{ pt.tag.name }}</span>
+          {% endfor %}
+        </div>
+        <p class="project-description">{{ project.description | truncate(200) }}</p>
+      </div>
     </div>
   {% endfor %}
 {% endblock %}

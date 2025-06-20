@@ -2,15 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Portfolio.css">
-    <title>{% block title %}My Portfolio{% endblock %}</title>
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="stylesheet" href="/Style/Portfolio.css" />
 </head>
 <body>
-    {% include "partials/header.njk" %}
+    {% include "./partials/header.njk" %}
 
-    {% block content %}{% endblock %}
+    <section class="left">
+        {% block left %}{% endblock %}
+    </section>
 
-    {% include "partials/footer.njk" %}
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <section class="right">
+        {% block right %}{% endblock %}
+    </section>
+
+    {% include "./partials/footer.njk" %}
 </body>
 </html>

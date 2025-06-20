@@ -1,9 +1,37 @@
 {% extends "./Layout.njk" %}
 
-{% block title %}Home - My Portfolio{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block content %}
+  <section class="welcome">
+    <h1>Welcome to my IT Portfolio</h1>
+    <p>My name is Mohamed el Salah AISSAOUI, a student in Computer Science at IUT Le Puy-en-Velay. Passionate about software development, video games, and new technologies. Feel free to explore my projects, background, and skills.</p>
+  </section>
 
-    <h1>Welcome to My Portfolio</h1>
-    <p>This is the homepage.</p>
+  <section class="about-me">
+    <h2>Who am I?</h2>
+    <p>
+      Currently in my second year of Computer Science, I’m developing skills in programming (C#, Kotlin, Java...), mobile and web app design, and game development using Godot 4. I’m curious, meticulous, and eager to grow in a creative and innovative environment.
+    </p>
+  </section>
+
+  <section class="highlight-projects">
+    <h2>Recent Projects</h2>
+    <p>Here are some of my projects you can explore:</p>
+    <ul>
+      {% for project in projects %}
+        <li>
+          <a href="/Projects/{{ project.id }}">{{ project.name }}</a> - {{ project.date | YearMonth }}
+        </li>
+      {% else %}
+        <li>No projects available at the moment.</li>
+      {% endfor %}
+    </ul>
+    <a href="/Projects">View all projects →</a>
+  </section>
+
+  <section class="contact-invite">
+    <h2>Contact</h2>
+    <p>Want to learn more or get in touch? <a href="/Contacts">Contact me here.</a></p>
+  </section>
 {% endblock %}

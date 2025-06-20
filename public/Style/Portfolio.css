@@ -17,6 +17,10 @@ body {
   margin: 0 auto;
 }
 
+main {
+  padding: 20px 0;
+}
+
 h1, h2, h3 {
   color: #2c3e50;
   margin-bottom: 15px;
@@ -31,6 +35,12 @@ a:hover {
   text-decoration: underline;
 }
 
+a[href^="/Projects"] {
+  display: inline-block;
+  margin-top: 30px;
+  font-weight: bold;
+}
+
 section {
   margin-bottom: 40px;
 }
@@ -41,6 +51,7 @@ ul {
   margin-bottom: 20px;
 }
 
+/* Project listing */
 .project {
   border: 1px solid #ddd;
   padding: 15px;
@@ -56,47 +67,6 @@ ul {
   max-width: 100%;
   height: auto;
   border-radius: 3px;
-}
-
-.contact-form {
-  background: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  max-width: 500px;
-}
-
-.contact-form label {
-  display: block;
-  margin-bottom: 6px;
-  font-weight: 600;
-}
-
-.contact-form input[type="text"],
-.contact-form input[type="email"],
-.contact-form textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1em;
-  font-family: inherit;
-}
-
-.contact-form button {
-  background-color: #2980b9;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 4px;
-  font-size: 1em;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.contact-form button:hover {
-  background-color: #1c5980;
 }
 
 .project-card {
@@ -144,19 +114,92 @@ ul {
   font-size: 1rem;
 }
 
-/* Détail */
+/* Project detail page */
 .project-detail-gallery {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
   margin: 20px 0;
 }
 
 .project-detail-gallery img {
-  max-width: 300px;
+  width: 300px;
+  max-width: 100%;
+  height: auto;
   border-radius: 8px;
 }
 
 .project-detail-description {
   margin-top: 20px;
   font-size: 1.1rem;
+}
+
+p strong {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+/* Contact form */
+.contact-form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  max-width: 500px;
+}
+
+.contact-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  font-family: inherit;
+}
+
+.contact-form button {
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #1c5980;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .project-card {
+    flex-direction: column;
+  }
+
+  .project-card img {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .project-detail-gallery {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .project-detail-gallery img {
+    width: 90%;
+    max-width: 100%;
+  }
 }

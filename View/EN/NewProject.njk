@@ -1,13 +1,13 @@
 {% extends "./Layout.njk" %}
 
-{% block title %}Nouveau Projet{% endblock %}
+{% block title %}New Project{% endblock %}
 
 {% block content %}
   <form method="POST" action="/Projects">
-    <input type="text" name="name" placeholder="Nom du projet" required>
+    <input type="text" name="name" placeholder="Project name" required>
     <input type="date" name="date" required>
     <textarea name="description" placeholder="Description" required></textarea>
-    <input type="text" name="image" placeholder="Lien vers une image" required>
+    <input type="text" name="image" placeholder="Image URL" required>
 
     <fieldset>
       <legend>Tags</legend>
@@ -19,6 +19,6 @@
       {% endfor %}
     </fieldset>
 
-    <button type="submit">Ajouter</button>
+    <button type="submit">Add</button>
   </form>
 {% endblock %}

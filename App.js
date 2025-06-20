@@ -19,13 +19,16 @@ const env = nunjucks.configure([path.join(__dirname, 'View')], {
 });
 
 
-env.addFilter('yearMonth', function(dateStr) {
+env.addFilter('yearMonth', yearMonthFilter);
+env.addFilter('YearMonth', yearMonthFilter);
+
+function yearMonthFilter(dateStr) {
   const date = new Date(dateStr);
   if (isNaN(date)) return '';
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
   return `${year}/${month}`;
-});
+}
 
 app.use((req, res, next) => {
   const lang = req.query.lang;
@@ -34,11 +37,25 @@ app.use((req, res, next) => {
 });
 
 
-app.get('/', (req, res) => {
-  res.render("FR/Index.njk");
+app.get('/', async (req, res) => {
+  const projects = await prisma.project.findMany({
+      include: {
+        tags: {
+          include: {
+            tag: true,
+          },
+        },
+      },
+    });
+
+  res.render(`${res.locals.lang}/Index.njk`, {
+    projects,
+    lang: res.locals.lang 
+  });
 });
+
 app.get('/Contacts', (req, res) => {
-  res.render("FR/Contacts.njk");
+  res.render(`${res.locals.lang}/Contacts.njk`);
 });
 
 app.get('/Parcours', (req, res) => {
@@ -60,7 +77,7 @@ app.get('/Projects', async (req, res) => {
     });
 
      console.log(projects);
-    res.render("FR/Projects.njk", { projects });
+    res.render(`${res.locals.lang}/Projects.njk`, { projects });
   } catch (err) {
     console.error('Error loading projects:', err);
     res.status(500).send('Internal Server Error');
@@ -133,7 +150,7 @@ app.get('/Tags/:tagId', async (req, res) => {
       },
     });
 
-    res.render(`${lang}/Projects.njk`, { projects, tag });
+    res.render(`${res.locals.lang}/Projects.njk`, { projects, tag });
   } catch (err) {
     console.error('Error filtering projects by tag:', err);
     res.status(500).send('Internal Server Error');
@@ -165,7 +182,7 @@ app.get('/Projects/:id', async (req, res) => {
       return res.status(404).send('Project not found');
     }
 
-    res.render(`${lang}/ProjectDetail.njk`, { project });
+    res.render(`${res.locals.lang}/ProjectDetail.njk`, { project });
   } catch (err) {
     console.error('Error fetching project:', err);
     res.status(500).send('Internal Server Error');
